@@ -1,0 +1,17 @@
+{
+  "name": "tactacbox",
+  "collaborators": [
+    "mbostwick <mbostwick89@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "tactacbox_bg.wasm",
+    "tactacbox.js",
+    "tactacbox.d.ts"
+  ],
+  "module": "tactacbox.js",
+  "types": "tactacbox.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}

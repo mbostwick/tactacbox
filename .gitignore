@@ -1,0 +1,7 @@
+/target
+**/*.rs.bk
+Cargo.lock
+bin/
+pkg/tactac*
+wasm-pack.log
+/.idea/
