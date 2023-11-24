@@ -3,11 +3,18 @@
   "collaborators": [
     "mbostwick <mbostwick89@gmail.com>"
   ],
+  "description": "a multi-dimensional tic tac toe game that in wasm using rust",
   "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mbostwick/tactacbox.git"
+  },
   "files": [
     "tactacbox_bg.wasm",
     "tactacbox.js",
-    "tactacbox.d.ts"
+    "tactacbox.d.ts",
+    "LICENSE_MIT"
   ],
   "module": "tactacbox.js",
   "types": "tactacbox.d.ts",

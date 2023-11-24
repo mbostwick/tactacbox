@@ -1,11 +1,13 @@
-<head title="tac tac box">
+<!DOCTYPE html>
+<head>
+    <title>tac tac box</title>
     <script type="module">
-        const loadBoxModule = await import("./pkg");
+        const loadBoxModule = await import("./tactacbox.js");
         const loadedWsm = await loadBoxModule.default();
         console.log(loadedWsm)
         loadedWsm.begin();
     </script>
 </head>
 <body>
-
+    ... loading tac tac boxes..
 </body>
