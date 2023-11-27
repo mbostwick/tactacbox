@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <head>
     <title>tac tac box</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        canvas {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+    </style>
     <script type="module">
         const loadBoxModule = await import("./tactacbox.js");
         const loadedWsm = await loadBoxModule.default();
@@ -9,5 +19,108 @@
     </script>
 </head>
 <body>
-    ... loading tac tac boxes..
+    <div id="lid">
+        ... loading tac tac boxes..
+    </div>
+    <div id="space-can">
+        <canvas id="glcanvas" width="640" height="480"></canvas>
+    </div>
+
+    <script>
+        function writeMessage(msg){
+            const msgItem = document.createElement("p");
+            msgItem.innerText = msg;
+            const msgZone = document.getElementById("lid");
+            msgZone.appendChild(msgItem);
+        }
+        function clearMessages(){
+            const msgZone = document.getElementById("lid");
+            msgZone.innerHTML = "";
+        }
+        function main() {
+            try {
+                const canvas = document.querySelector("#glcanvas");
+                const gl = canvas.getContext("webgl2");
+                if (gl === null) {
+                    writeMessage("Unable to initialize WebGL 2. Your browser or machine may not support it.")
+                    return;
+                }
+                gl.clearColor(0.0, 0.0, 0.0, 1.0);
+                gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+                const triVertArray = [
+                    0.0,0.5, //top middle
+                    -0.5, -0.5, // bottom left
+                    0.5, -0.5, // bottom right
+                ];
+                const triVertBuf = new Float32Array(triVertArray);
+                const triGeoBuf = gl.createBuffer();
+                if(!triGeoBuf){
+                    writeMessage("Unable to Create Buffer!")
+                }
+                gl.bindBuffer(gl.ARRAY_BUFFER, triGeoBuf);
+                gl.bufferData(gl.ARRAY_BUFFER, triVertBuf, gl.STATIC_DRAW);
+                //gsl
+                const vertexShaderSource = `#version 300 es
+                precision mediump float;
+                in vec2 vertexPosition;
+                void main(){
+                    gl_Position = vec4(vertexPosition, 0.0, 1.0);
+                }`
+                const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+                gl.shaderSource(vertexShader, vertexShaderSource);
+                gl.compileShader(vertexShader);
+                if(!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)){
+                    const compileError = gl.getShaderInfoLog(vertexShader);
+                    writeMessage(`GSL Compile Error, on vertex shader: ${compileError}`);
+                    return;
+                }
+                const fragShaderSource = `#version 300 es
+                precision mediump float;
+                out vec4 outColor;
+                void main(){
+                     outColor = vec4(0.294, 0.0, 0.51, 1.0);
+                }`;
+                const fragShader = gl.createShader(gl.FRAGMENT_SHADER);
+                gl.shaderSource(fragShader, fragShaderSource);
+                gl.compileShader(fragShader);
+                if(!gl.getShaderParameter(fragShader, gl.COMPILE_STATUS)){
+                    const compileError = gl.getShaderInfoLog(fragShader);
+                    writeMessage(`GSL Compile Error, on fragment shader: ${compileError}`);
+                    return;
+                }
+                const shaderProgram = gl.createProgram();
+                gl.attachShader(shaderProgram, vertexShader);
+                gl.attachShader(shaderProgram,fragShader);
+                gl.linkProgram(shaderProgram);
+                if(!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)){
+                    const linkError = gl.getShaderInfoLog(shaderProgram);
+                    writeMessage(`Failed To LINK shaders: ${linkError}`);
+                    return;
+                }
+                const vertexPositionAttribLocation = gl.getAttribLocation(shaderProgram, 'vertexPosition');
+                if(!(vertexPositionAttribLocation >= 0)){
+                    writeMessage(`Failed To get Vertex Position, ${vertexPositionAttribLocation}`);
+                    return;
+                }
+                clearMessages();
+                gl.clearColor(0.08,0.08, 0.08, 1.0);
+                gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+                gl.viewport(0,0, canvas.width, canvas.height);
+                gl.useProgram(shaderProgram);
+                gl.enableVertexAttribArray(vertexPositionAttribLocation);
+                gl.bindBuffer(gl.ARRAY_BUFFER, triGeoBuf);
+                gl.vertexAttribPointer(
+                    vertexPositionAttribLocation,
+                    2,
+                    gl.FLOAT,
+                    false, 0, 0
+                )
+                gl.drawArrays(gl.TRIANGLES, 0, 3);
+            }catch(e){
+                console.warn(e);
+                writeMessage("Error Handling GL")
+            }
+        }
+        main();
+    </script>
 </body>
