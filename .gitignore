@@ -5,3 +5,5 @@ bin/
 pkg/tactac*
 wasm-pack.log
 /.idea/
+node_modules/*
+src/web/node_modules/*

@@ -1,5 +1,5 @@
 mod utils;
-
+use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 use crate::utils::set_panic_hook;
 
@@ -15,7 +15,17 @@ extern {
 }
 
 #[wasm_bindgen]
-pub fn begin() {
-    set_panic_hook();
-    alert("Welcome to tac tac box!");
+#[derive(Copy, Clone, Debug)]
+pub enum GameState {
+    OnGoing = 0,
+    Winner = 1,
+    Draw = 2,
+}
+
+#[wasm_bindgen]
+pub fn check_cube_for_win() -> GameState {
+    if(given_shape.turns > 100){
+        alert("To Many Turns!");
+    }
+    return ShapeState { result: GameState::OnGoing };
 }
