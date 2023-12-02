@@ -12,12 +12,6 @@ import {BuildGame} from "./Game/BuildGame";
 import {Game} from "./Game/Game";
 import {GameListing} from "./Lobby/GameListing";
 
-import("../../../pkg/tactacbox.js").then(module => {
-    module.default().then(x=> {
-
-    });
-});
-
 const router = createBrowserRouter([
     {
         path: "/about",

@@ -7,30 +7,17 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import {AppFooter} from "../AppFooter";
 import {useNavigate} from "react-router-dom";
+import {RustApp} from "../App";
+import {Game} from "../Game/Game";
 
-export function GameLanding(props: {error?: string}){
+export function GameLanding(props: {rustFeatures: RustApp}){
     const activeGame = useAppStore(state => state.game);
     const navigate = useNavigate();
     return <>
             <Container>
                 <AppHeader />
                 <Row>
-                    <Col md={{span:8, offset:2}}>
-                        <Card className="mt-2 p-2 bg-white border border-dark rounded text-center">
-                            <Card.Body>
-                                <Card.Title>
-                                    <span className="float-end">
-                                </span>
-                                </Card.Title>
-                                {props.error ? props.error : "Yikes An Unexpected Error!" }
-                            </Card.Body>
-                        </Card>
-                        <div className="d-grid gap-2 mt-2 p-2">
-                            <Button variant="primary" size="lg" onClick={()=> {navigate("/")}} >
-                                Return Home
-                            </Button>
-                        </div>
-                    </Col>
+                    <Game />
                 </Row>
                 <AppFooter/>
             </Container>

@@ -23,9 +23,7 @@ pub enum GameState {
 }
 
 #[wasm_bindgen]
-pub fn check_cube_for_win() -> GameState {
-    if(given_shape.turns > 100){
-        alert("To Many Turns!");
-    }
-    return ShapeState { result: GameState::OnGoing };
+pub fn check_cube_for_win(turns: i32) -> GameState {
+    // alert("To Many Turns!");
+    return GameState::OnGoing;
 }

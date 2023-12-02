@@ -13,7 +13,8 @@
   "files": [
     "tactacbox_bg.wasm",
     "tactacbox.js",
-    "tactacbox.d.ts"
+    "tactacbox.d.ts",
+    "LICENSE_MIT"
   ],
   "module": "tactacbox.js",
   "types": "tactacbox.d.ts",
