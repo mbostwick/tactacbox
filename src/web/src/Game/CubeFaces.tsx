@@ -1,4 +1,5 @@
-import {Vector3} from "three";
+import {Vector3} from "@react-three/fiber";
+
 
 export type player = number;
 export function CubeFaces(props: {rows: number, cols: number, faces: number}) {
@@ -10,11 +11,11 @@ export function CubeFaces(props: {rows: number, cols: number, faces: number}) {
         const col = Math.floor(position/ props.cols) + (position % props.cols) * space;
         const face = Math.floor(position/ props.faces) + (position % props.faces) * space;
 
-        return new Vector3(row, col, face);
+        return [row, col, face];
     }
     return (<>
             {items.map((x, position)=> {
-                return (<mesh position={getPositionForItem(position)}>
+                return (<mesh key={position} position={getPositionForItem(position)}>
                     <boxGeometry/>
                     <meshStandardMaterial/>
                 </mesh>)
