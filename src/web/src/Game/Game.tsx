@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber'
 import {CubeFaces} from "./CubeFaces";
-import {CameraControls} from "../Vendor/CameraControls";
+import {CameraControls} from "@react-three/drei";
 
 export function NewGame(): ActiveGame {
     return {
