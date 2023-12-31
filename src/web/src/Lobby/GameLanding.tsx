@@ -14,9 +14,9 @@ export function GameLanding(props: {rustFeatures: RustApp}){
     const activeGame = useAppStore(state => state.game);
     const navigate = useNavigate();
     return <>
-            <Container>
+            <Container fluid className="mvh-100">
                 <AppHeader />
-                <Row>
+                <Row className="mvh-100">
                     <Game />
                 </Row>
                 <AppFooter/>

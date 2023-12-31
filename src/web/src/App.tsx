@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {GameLanding} from "./Lobby/GameLanding";
 import {InitOutput} from "../../../pkg";
+import "./App.css";
 
 
 let loadedModule: InitOutput | null = null;

@@ -1,6 +1,7 @@
 import { Canvas } from '@react-three/fiber'
 import {CubeFaces} from "./CubeFaces";
 import {CameraControls} from "../Vendor/CameraControls";
+import {MovingShape} from "./MovingShape";
 
 export function NewGame(): ActiveGame {
     return {
@@ -11,11 +12,13 @@ export interface ActiveGame {
     name: string;
 }
 export function Game(){
-//
-    return <div style={{width: "50vw", height: "50vh"}}>
-        <Canvas flat linear>
-            <CubeFaces rows={3} cols={3} faces={4}/>
+    /*
+            <CubeFaces row={3} col={3} face={3}/>
             <CameraControls />
+     */
+    return <div style={{ width: "100%"}}>
+        <Canvas flat linear className="mvh-100">
+            <MovingShape />
         </Canvas>
     </div>
 }
