@@ -22,6 +22,18 @@ pub enum GameState {
     Draw = 2,
 }
 
+extern crate console_error_panic_hook;
+
+struct CubeGame;
+
+impl CubeGame {
+    pub fn new() -> CubeGame {
+        set_panic_hook();
+
+        CubeGame
+    }
+}
+
 #[wasm_bindgen]
 pub fn check_cube_for_win(turns: i32) -> GameState {
     // alert("To Many Turns!");

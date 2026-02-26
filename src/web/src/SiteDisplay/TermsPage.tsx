@@ -1,13 +1,12 @@
 import {AppHeader} from "../AppHeader";
 import {AppFooter} from "../AppFooter";
-import {Container} from "react-bootstrap";
 
 export function TermsPage() {
     const company = "Source Code Owner";
     const service = "Tach Game Engine";
     const url = "tach.io";
     return <>
-        <Container>
+        <div className="container mx-auto px-4">
             <AppHeader/>
             <h2> Terms of Service </h2>
             <p>
@@ -307,6 +306,6 @@ export function TermsPage() {
                 that is at all related to there choice to not get written approval and not make a good faith effort to resolve the concerns.
             </p>
             <AppFooter/>
-        </Container>
+        </div>
     </>
 }

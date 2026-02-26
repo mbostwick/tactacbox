@@ -1,26 +1,22 @@
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
+import {useNavigate} from "react-router-dom";
 
 export function AppFooter() {
+    let navigate = useNavigate();
+
     return <>
-        <hr />
-        <Row className="align-self-end bg-white">
-            <Col className="m-2">
-                <Button variant={"link"} href={"/about"}>
+        <hr/>
+        <div className="flex flex-wrap align-self-end">
+            <div className="m-2">
+                <button className="btn btn-link" onClick={() => navigate("/about")}>
                     About
-                </Button>
-            </Col>
-            <Col className="m-2">
-                <Button variant={"link"} href={"/terms"}>
+                </button>
+                <button className="btn btn-link" onClick={() => navigate("/terms")}>
                     Terms
-                </Button>
-            </Col>
-            <Col md="auto" className="m-2">
-                <Button variant={"link"} href={"/privacy"}>
+                </button>
+                <button className="btn btn-link" onClick={() => navigate("/privacy")}>
                     Privacy
-                </Button>
-            </Col>
-        </Row>
+                </button>
+            </div>
+        </div>
     </>
 }

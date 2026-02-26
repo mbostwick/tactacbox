@@ -1,5 +1,6 @@
-import {describe, expect, test} from '@jest/globals';
+import { describe, test, expect } from 'vitest'
 import {CubePosition, GetNumberOfShapes} from "../Game/CubeFaces";
+
 describe('Cube Face Tests', () => {
     test('Gets Number Of Shapes (1)', () => {
         const shape: CubePosition = {

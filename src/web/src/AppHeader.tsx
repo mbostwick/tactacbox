@@ -1,12 +1,10 @@
-import Row from "react-bootstrap/Row";
 import {Logo} from "./Logo";
 import { Parallax } from 'react-parallax';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 export function AppHeader() {
     return <>
-        <Row>
+        <div className="flex flex-wrap -mx-4">
             <Logo/>
-        </Row>
+        </div>
     </>
 }

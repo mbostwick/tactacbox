@@ -1,4 +1,3 @@
-import {Container, Button, Card, Row, Col } from "react-bootstrap";
 import {AppHeader} from "./AppHeader";
 import {AppFooter} from "./AppFooter";
 import {useNavigate} from "react-router-dom";
@@ -11,21 +10,19 @@ export function AppError(props: {error?: string}) {
         navigate("/");
     }
     return (<>
-        <Container>
+        <div className="container mx-auto px-4">
             <AppHeader />
-            <Row>
-                <Col md={{span:8, offset:2}}>
-                    <Card className="mt-2 p-2 bg-white border border-dark rounded text-center">
-                        <Card.Body>
-                            {props.error ? props.error : "Yikes An Unexpected Error!" }
-                        </Card.Body>
-                    </Card>
-                    <Button variant="primary" size="lg" onClick={clickHome} >
+            <div className="flex flex-wrap -mx-4">
+                <div className="md:w-2/3 md:mx-auto">
+                    <div className="card bg-base-100 shadow-xl w-96 mt-2 p-2 bg-white border border-dark rounded text-center">
+                        {props.error ? props.error : "Yikes An Unexpected Error!" }
+                    </div>
+                    <button className="btn btn-primary btn-lg" onClick={clickHome} >
                         Return Home
-                    </Button>
-                </Col>
-            </Row>
+                    </button>
+                </div>
+            </div>
             <AppFooter/>
-        </Container>
+        </div>
     </>);
 }

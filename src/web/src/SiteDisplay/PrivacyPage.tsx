@@ -1,13 +1,12 @@
 import {AppHeader} from "../AppHeader";
 import {AppFooter} from "../AppFooter";
-import {Container} from "react-bootstrap";
 
 export function PrivacyPage() {
     const company = "Source Code Owner";
     const service = "Tach Game Engine";
     const url = "tach.io";
     return <>
-        <Container>
+        <div className="container mx-auto px-4">
             <AppHeader/>
             <h2> Privacy Policy </h2>
             <p>
@@ -74,6 +73,6 @@ export function PrivacyPage() {
                 googlemail dot com.
             </p>
             <AppFooter/>
-        </Container>
+        </div>
     </>
 }

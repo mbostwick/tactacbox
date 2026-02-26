@@ -14,25 +14,20 @@ import {
     Vector4,
 } from 'three'
 import {forwardRef, useMemo, useEffect, ForwardRefExoticComponent, PropsWithoutRef, RefAttributes} from 'react'
-import { extend, useFrame, useThree, ReactThreeFiber, EventManager } from '@react-three/fiber'
+import {extend, useFrame, useThree, EventManager } from '@react-three/fiber'
 import CameraControlsImpl from 'camera-controls'
 export type DreiForwardRefComponent<P, T> = ForwardRefExoticComponent<PropsWithoutRef<P> & RefAttributes<T>>;
-export type CameraControlsProps = Omit<
-    ReactThreeFiber.Overwrite<
-        ReactThreeFiber.Node<CameraControlsImpl, typeof CameraControlsImpl>,
-        {
-            camera?: PerspectiveCamera | OrthographicCamera
-            domElement?: HTMLElement
-            makeDefault?: boolean
-            onStart?: (e?: { type: 'controlstart' }) => void
-            onEnd?: (e?: { type: 'controlend' }) => void
-            onChange?: (e?: { type: 'update' }) => void
-            events?: boolean // Wether to enable events during controls interaction
-            regress?: boolean
-        }
-    >,
-    'ref'
->
+
+export type CameraControlsProps = {
+    camera?: PerspectiveCamera | OrthographicCamera
+    domElement?: HTMLElement
+    makeDefault?: boolean
+    onStart?: (e: { type: 'controlstart' }) => void
+    onEnd?: (e: { type: 'controlend' }) => void
+    onChange?: (e: { type: 'update' }) => void
+    events?: boolean
+    regress?: boolean
+}
 
 export const CameraControls: DreiForwardRefComponent<CameraControlsProps, CameraControlsImpl> = /* @__PURE__ */ forwardRef<
     CameraControlsImpl,
@@ -75,7 +70,7 @@ export const CameraControls: DreiForwardRefComponent<CameraControlsProps, Camera
     const explCamera = camera || defaultCamera
     const explDomElement = (domElement || events.connected || gl.domElement) as HTMLElement
 
-    const controls = useMemo(() => new CameraControlsImpl(explCamera), [explCamera])
+    const controls = useMemo(() => new CameraControlsImpl(explCamera), [])
 
     useFrame((state, delta) => {
         if (controls.enabled) controls.update(delta)
@@ -93,11 +88,11 @@ export const CameraControls: DreiForwardRefComponent<CameraControlsProps, Camera
             if (onChange) onChange({type: "update"})
         }
 
-        const onStartCb: CameraControlsProps['onStart'] = (e) => {
+        const onStartCb: CameraControlsProps['onStart'] = (e: { type: 'controlstart' }) => {
             if (onStart) onStart(e)
         }
 
-        const onEndCb: CameraControlsProps['onEnd'] = (e) => {
+        const onEndCb: CameraControlsProps['onEnd'] = (e: { type: 'controlend' }) => {
             if (onEnd) onEnd(e)
         }
 

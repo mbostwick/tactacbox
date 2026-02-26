@@ -30,7 +30,6 @@ function Dodecahedron() {
         rotation: new Euler(x / aspect, y / aspect, 0)
     });
     const onHover = (e: unknown | {hovering: boolean}) => {
-        console.log("hob")
         set({
             scale: !!(e as { hovering: boolean })?.hovering ? [1.2, 1.2, 1.2] : [1, 1, 1]
         });
